@@ -269,9 +269,10 @@ def handle_paragraphs(element, potential_tags, options):
         if child.tag not in potential_tags and child.tag != 'done':
             LOGGER.debug('unexpected in p: %s %s %s', child.tag, child.text, child.tail)
             continue
-        # spacing = child.tag in SPACING_PROTECTED  # todo: outputformat.startswith('xml')?
+        spacing = child.tag in SPACING_PROTECTED  
+        # # todo: outputformat.startswith('xml')?
         # todo: act on spacing here?
-        processed_child = handle_textnode(child, options, comments_fix=False, preserve_spaces=True)
+        processed_child = handle_textnode(child, options, comments_fix=False, preserve_spaces=spacing)
         if processed_child is not None:
             # todo: needing attention!
             if processed_child.tag == 'p':
